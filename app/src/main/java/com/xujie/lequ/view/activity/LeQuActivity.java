@@ -6,9 +6,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.xujie.lequ.R;
 
@@ -39,7 +41,21 @@ public class LeQuActivity extends BaseActivity {
 
         initView();
         //ActionBarDrawerToggle作用是在toolbar上创建一个点击弹出drawer的按钮而已
-        mDrawerToggle = new ActionBarDrawerToggle(this, homeSlidemenu, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawerToggle = new ActionBarDrawerToggle(this, homeSlidemenu, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                Toast.makeText(LeQuActivity.this,"菜单打开了",Toast.LENGTH_SHORT).show();
+                super.onDrawerOpened(drawerView);
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                Toast.makeText(LeQuActivity.this,"菜单关闭了",Toast.LENGTH_SHORT).show();
+                super.onDrawerClosed(drawerView);
+            }
+
+        };
         homeSlidemenu.addDrawerListener(mDrawerToggle);
         //不写这句话，是没有按钮显示的
         mDrawerToggle.syncState();
