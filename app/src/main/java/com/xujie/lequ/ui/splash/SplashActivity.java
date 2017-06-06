@@ -10,7 +10,7 @@ public class SplashActivity extends AppActivity {
 
     @Override
     protected BaseFragment getFirstFragment() {
-        return null;
+        return SplashFragment.getInstance();
     }
 
     @Override

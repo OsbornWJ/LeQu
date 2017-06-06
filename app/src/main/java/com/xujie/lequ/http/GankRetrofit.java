@@ -21,7 +21,7 @@ public class GankRetrofit {
             synchronized (GankRetrofit.class) {
                 if (retrofit == null) {
                     retrofit = new Retrofit.Builder()
-                            .baseUrl(Constant.GANHUO_FULI)
+                            .baseUrl(Constant.GANHUO_API)
                             .addConverterFactory(GsonConverterFactory.create())
                             .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                             .client(LeQuApp.defaultOkHttpClient())

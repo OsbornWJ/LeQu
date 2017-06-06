@@ -1,5 +1,6 @@
 package com.xujie.lequ.ui.splash;
 
+import com.xujie.lequ.app.Constant;
 import com.xujie.lequ.base.BasePresenter;
 import com.xujie.lequ.data.DataResponsitory;
 import com.xujie.lequ.data.DataSouce;
@@ -16,8 +17,7 @@ public class SplashPresenter extends BasePresenter<SplashContract.View> implemen
 
     @Override
     public void start() {
-        mResponsitory.getGirls(1, 1, new DataSouce.LoadDataCallBack(){
-
+        mResponsitory.getData(Constant.GANHUO_FULI, 1, 1, new DataSouce.LoadDataCallBack(){
 
             @Override
             public void onSuccess(Object object) {

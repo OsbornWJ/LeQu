@@ -14,8 +14,9 @@ import rx.Observable;
 public interface GankService {
 
     interface GirlsService {
-        @GET("{count}/{page}")
+        @GET("{type}/{count}/{page}")
         Observable<GirlsBean> getGirls(
+                @Path("type") String type,
                 @Path("count") int count,
                 @Path("page") int page
         );

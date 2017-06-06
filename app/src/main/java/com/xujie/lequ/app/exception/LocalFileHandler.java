@@ -4,13 +4,13 @@ import android.content.Context;
 import android.os.Looper;
 import android.widget.Toast;
 
+import com.xujie.lequ.util.FileUtil;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Date;
-
-import coder.prettygirls.util.FileUtil;
 
 /**
  * 本地异常处理类

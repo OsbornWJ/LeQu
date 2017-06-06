@@ -14,6 +14,6 @@ public interface DataSouce {
         void onDataNotAvailable();
     }
 
-    void getGirls(int page, int size, LoadDataCallBack callback);
+    void getGirls(String type, int page, int size, LoadDataCallBack callback);
 
 }

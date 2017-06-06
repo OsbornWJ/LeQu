@@ -12,6 +12,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.xujie.lequ.R;
 import com.xujie.lequ.app.ActivityManager;
 import com.xujie.lequ.base.BaseFragment;
+import com.xujie.lequ.ui.home.HomeActivity;
+import com.xujie.lequ.ui.home.LeQuActivity;
 
 import butterknife.BindView;
 
@@ -33,8 +35,14 @@ public class SplashFragment extends BaseFragment<SplashPresenter> implements Spl
     }
 
     @Override
-    protected void initView(View view, Bundle savedInstanceState) {
+    public void onResume() {
+        super.onResume();
+    }
 
+    @Override
+    protected void initView(View view, Bundle savedInstanceState) {
+        initAnim();
+        mPresenter.start();
     }
 
     private void initAnim() {
@@ -52,8 +60,8 @@ public class SplashFragment extends BaseFragment<SplashPresenter> implements Spl
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                /*startActivity(new Intent(getActivity(), HomeActivity.class));
-                ActivityManager.getInstance().finishActivity();*/
+                startActivity(new Intent(getActivity(), HomeActivity.class));
+                ActivityManager.getInstance().finishActivity();
             }
 
             @Override
@@ -63,22 +71,30 @@ public class SplashFragment extends BaseFragment<SplashPresenter> implements Spl
         });
     }
 
-
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_splash;
     }
 
     @Override
+    protected void initPresenter() {
+        mPresenter = new SplashPresenter();
+    }
+
+    @Override
     public void showGirl(String girlUrl) {
         Glide.with(getActivity())
                 .load(girlUrl)
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .animate(scaleAnimation)
                 .into(mSplashImg);
     }
 
     @Override
     public void showGirl() {
-
+        Glide.with(getActivity())
+                .load(R.mipmap.welcome)
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .animate(scaleAnimation)
+                .into(mSplashImg);
     }
 }
