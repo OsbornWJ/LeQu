@@ -69,7 +69,7 @@ public abstract class BaseFragment<T extends IPresenter> extends Fragment implem
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mPresenter.attachView(this);
+        if (mPresenter != null) mPresenter.attachView(this);
         unbinder = ButterKnife.bind(this, view);
         initView(view, savedInstanceState);
     }

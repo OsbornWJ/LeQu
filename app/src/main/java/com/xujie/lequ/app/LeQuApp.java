@@ -44,7 +44,7 @@ public class LeQuApp extends Application {
         return client;
     }
 
-    public static LeQuApp getmInstance() {
+    public static LeQuApp getInstance() {
         return mInstance;
     }
 }

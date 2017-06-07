@@ -1,11 +1,13 @@
 package com.xujie.lequ.ui.home;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.ViewStub;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
+import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.xujie.lequ.R;
 import com.xujie.lequ.adapter.GirlsAdapter;
 import com.xujie.lequ.base.BaseFragment;
@@ -21,7 +23,7 @@ import butterknife.BindView;
  * @date 2017/6/6
  * @discription
  */
-public class GirlsFragment extends BaseFragment<GirlsPresenter> implements GirlsContract.View {
+public class GirlsFragment extends BaseFragment<GirlsPresenter> implements GirlsContract.View, RecyclerArrayAdapter.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.network_error_layout)
     ViewStub networkErrorLayout;
@@ -38,6 +40,11 @@ public class GirlsFragment extends BaseFragment<GirlsPresenter> implements Girls
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_home;
+    }
+
+    public static GirlsFragment getInstance() {
+        GirlsFragment mainFragment = new GirlsFragment();
+        return mainFragment;
     }
 
     @Override
@@ -59,13 +66,19 @@ public class GirlsFragment extends BaseFragment<GirlsPresenter> implements Girls
 
         recyclerView.setAdapterWithProgress(mAdapter);
 
+        mAdapter.setMore(R.layout.load_more_layout, this);
+        mAdapter.setNoMore(R.layout.no_more_layout);
+        mAdapter.setError(R.layout.error_layout);
 
-
+        recyclerView.setRefreshListener(this);
     }
 
     @Override
     public void refresh(List<GirlsBean.ResultsEntity> datas) {
-
+        data.clear();
+        data.addAll(datas);
+        mAdapter.clear();
+        mAdapter.addAll(datas);
     }
 
     @Override
@@ -76,11 +89,32 @@ public class GirlsFragment extends BaseFragment<GirlsPresenter> implements Girls
 
     @Override
     public void showError() {
+        recyclerView.showError();
 
+        if (netWorkErrorView != null){
+            netWorkErrorView.setVisibility(View.VISIBLE);
+        }
+        netWorkErrorView = networkErrorLayout.inflate();
     }
 
     @Override
     public void showNormal() {
+        if (netWorkErrorView != null){
+            netWorkErrorView.setVisibility(View.GONE);
+        }
+    }
 
+    @Override
+    public void onLoadMore() {
+        if (data.size() % 2 == 0){
+            page ++;
+            mPresenter.getGirls(page, size, false);
+        }
+    }
+
+    @Override
+    public void onRefresh() {
+        mPresenter.getGirls(1, size, true);
+        page = 1;
     }
 }

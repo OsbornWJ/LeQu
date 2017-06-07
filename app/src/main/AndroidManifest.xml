@@ -25,6 +25,8 @@
         </activity>
         <activity android:name=".ui.home.HomeActivity">
         </activity>
+        <activity android:name=".ui.girl.GirlActivity">
+        </activity>
     </application>
 
 </manifest>
