@@ -20,7 +20,7 @@ public class RemoteDataSource implements DataSouce{
     @Override
     public void getGirls(String type, int page, int size, final LoadDataCallBack callback) {
         GankRetrofit.getRetorfit()
-                .create(GankService.GirlsService.class)
+                .create(GankService.class)
                 .getGirls(type, size, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

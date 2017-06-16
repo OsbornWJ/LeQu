@@ -26,8 +26,6 @@ public class LeQuActivity extends AppActivity {
 
     @BindView(R.id.home_toolbar)
     Toolbar homeToolbar;
-    @BindView(R.id.iv_menu)
-    ImageView ivMenu;
     @BindView(R.id.menu_listview)
     ListView menuListview;
     @BindView(R.id.home_slidemenu)

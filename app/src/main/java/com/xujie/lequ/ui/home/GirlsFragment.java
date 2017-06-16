@@ -93,6 +93,7 @@ public class GirlsFragment extends BaseFragment<GirlsPresenter> implements Girls
 
         if (netWorkErrorView != null){
             netWorkErrorView.setVisibility(View.VISIBLE);
+            return;
         }
         netWorkErrorView = networkErrorLayout.inflate();
     }

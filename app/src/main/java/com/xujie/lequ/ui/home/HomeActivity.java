@@ -23,16 +23,14 @@ import butterknife.BindView;
 public class HomeActivity extends AppActivity {
 
 
-    /*private ActionBarDrawerToggle mDrawerToggle;
+    private ActionBarDrawerToggle mDrawerToggle;
     private String[] data = {"我的","设置","会员"};
     private ArrayAdapter arrayAdapter;
 
-    @BindView(R.id.iv_menu)
-    ImageView ivMenu;
     @BindView(R.id.menu_listview)
     ListView menuListview;
     @BindView(R.id.home_slidemenu)
-    DrawerLayout homeSlidemenu;*/
+    DrawerLayout homeSlidemenu;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.fab)
@@ -64,18 +62,18 @@ public class HomeActivity extends AppActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true); //设置返回键可用
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        /*//创建返回键，并实现打开关/闭监听
+        //创建返回键，并实现打开关/闭监听
         //ActionBarDrawerToggle作用是在toolbar上创建一个点击弹出drawer的按钮而已
         mDrawerToggle = new ActionBarDrawerToggle(this, homeSlidemenu, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
 
             @Override
             public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
+//                super.onDrawerOpened(drawerView);
             }
 
             @Override
             public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
+//                super.onDrawerClosed(drawerView);
             }
 
         };
@@ -83,7 +81,7 @@ public class HomeActivity extends AppActivity {
         //不写这句话，是没有按钮显示的
         mDrawerToggle.syncState();
         arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,data);
-        menuListview.setAdapter(arrayAdapter);*/
+        menuListview.setAdapter(arrayAdapter);
     }
 
     @Override

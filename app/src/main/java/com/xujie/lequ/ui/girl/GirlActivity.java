@@ -43,7 +43,7 @@ public class GirlActivity extends AppActivity {
     private void initView(){
         toolbar.setTitle("乐趣");
         toolbar.setTitleTextColor(Color.WHITE);
-        toolbar.setNavigationIcon(R.mipmap.ic_back);
+//        toolbar.setNavigationIcon(R.mipmap.ic_back);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
