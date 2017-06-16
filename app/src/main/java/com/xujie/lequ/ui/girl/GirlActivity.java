@@ -1,16 +1,27 @@
 package com.xujie.lequ.ui.girl;
 
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
 
 import com.xujie.lequ.R;
 import com.xujie.lequ.base.AppActivity;
 import com.xujie.lequ.base.BaseFragment;
+import com.xujie.lequ.util.ColorUtil;
+import com.xujie.lequ.util.ColorsUtil;
+
 import butterknife.BindView;
 
-public class GirlActivity extends AppActivity {
+/**
+ * @author wj
+ * @date 2017/6/7
+ * @discription gi
+ */
+public class GirlActivity extends AppActivity implements GirlFragment.OnGirlChange {
 
 
     @BindView(R.id.toolbar)
@@ -56,9 +67,31 @@ public class GirlActivity extends AppActivity {
     public void onClick(View view) {
 
     }
+    
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            finishActivity();
+            return false;
+        } else {
+            return super.onKeyDown(keyCode, event);
+        }
+
+    }
+    
 
     private void finishActivity() {
         finish();
         overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out);
+    }
+
+    @Override
+    public void change(int color) {
+        toolbar.setBackgroundColor(color);
+        if (Build.VERSION.SDK_INT >= 21){
+            Window window = getWindow();
+            window.setNavigationBarColor(ColorUtil.colorBurn(color));
+            window.setStatusBarColor(ColorUtil.colorBurn(color));
+        }
     }
 }

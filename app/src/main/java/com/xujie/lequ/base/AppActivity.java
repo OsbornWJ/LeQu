@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 
 import com.xujie.lequ.app.ActivityManager;
+import com.xujie.lequ.ui.girl.GirlFragment;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -61,5 +62,4 @@ public abstract class AppActivity extends BaseActivity {
     protected void handleIntent(Intent intent) {
 
     }
-
 }

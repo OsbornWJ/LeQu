@@ -1,17 +1,21 @@
 package com.xujie.lequ.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.ViewStub;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
+import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.xujie.lequ.R;
 import com.xujie.lequ.adapter.GirlsAdapter;
 import com.xujie.lequ.base.BaseFragment;
 import com.xujie.lequ.data.bean.GirlsBean;
+import com.xujie.lequ.ui.girl.GirlActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +36,7 @@ public class GirlsFragment extends BaseFragment<GirlsPresenter> implements Girls
 
     private View netWorkErrorView;
 
-    private List<GirlsBean.ResultsEntity> data;
+    private ArrayList<GirlsBean.ResultsEntity> data;
     private GirlsAdapter mAdapter;
     private int page = 1;
     private int size = 20;
@@ -71,6 +75,16 @@ public class GirlsFragment extends BaseFragment<GirlsPresenter> implements Girls
         mAdapter.setError(R.layout.error_layout);
 
         recyclerView.setRefreshListener(this);
+        mAdapter.setmOnItemClicklistener(new GirlsAdapter.OnItemClicklistener() {
+            @Override
+            public void onItemClick(int position, BaseViewHolder holder) {
+                Intent intent = new Intent(mActivity, GirlActivity.class);
+                intent.putParcelableArrayListExtra("girls", data);
+                intent.putExtra("position", position);
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeScaleUpAnimation(holder.itemView, holder.itemView.getWidth() / 2, holder.itemView.getHeight() / 2, 0, 0);
+                startActivity(intent, options.toBundle());
+            }
+        });
     }
 
     @Override
@@ -93,6 +107,7 @@ public class GirlsFragment extends BaseFragment<GirlsPresenter> implements Girls
 
         if (netWorkErrorView != null){
             netWorkErrorView.setVisibility(View.VISIBLE);
+            return;
         }
         netWorkErrorView = networkErrorLayout.inflate();
     }
