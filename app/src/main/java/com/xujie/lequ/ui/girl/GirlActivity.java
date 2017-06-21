@@ -5,6 +5,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 
@@ -54,13 +56,33 @@ public class GirlActivity extends AppActivity implements GirlFragment.OnGirlChan
     private void initView(){
         toolbar.setTitle("乐趣");
         toolbar.setTitleTextColor(Color.WHITE);
-//        toolbar.setNavigationIcon(R.mipmap.ic_back);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.mipmap.ic_back);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finishActivity();
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_girl, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.share_img){
+            girlFragment.shareGirl();
+            return true;
+        } else if (id == R.id.save_img){
+            girlFragment.saveGirl();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
